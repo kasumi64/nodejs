@@ -1,0 +1,21 @@
+npm install -g cnpm --registry=https://registry.npm.taobao.org
+npm list --depth=0
+npm list --depth=0 --global
+npm info jquery
+
+npm init --yes
+
+cnpm install jquery@3.20 //某个版本
+cnpm install express --save-dev
+cnpm install mysql --save-dev
+cnpm install ejs --save-dev
+cnpm install axios --save-dev
+cnpm install mongodb --save-dev
+cnpm install -g nodemon / supervisor / forever
+
+npm uninstall nodemon --save-dev/-S-D-O
+
+packaga.json中库的版本号：
+（~）更新最后一位，修复版本的bug；
+（^）更新到中间一位，小版本的更新；
+（*）更新到最新的版本
