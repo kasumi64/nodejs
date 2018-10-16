@@ -1,13 +1,17 @@
-initModule(['jquery3','http'],function(req, exports, module)
+initModule([],function(req, exports, module)
 {
-	var doc = document, win = window, utils = req('utils')
+	var doc = document, win = window, utils = req('utils');
+	var userBox, paging;
 	
 	function init(){
-		
+		paging= req('paging')('.paging');
+		paging.click(function(page){
+			search(page);
+		});
 	}
 	function events(){
 		kit('#search').click(function(e){
-			search();
+			search(1);
 		});
 		
 		kit('#add').click(function(e){
@@ -36,7 +40,15 @@ initModule(['jquery3','http'],function(req, exports, module)
 				table.html('');
 			});
 		});
-		
+		userBox = kit('.userBox').click(function(e){
+			if(e.target===this) userBox.hide();
+		});
+		userBox.find('#updata').click(function(e){
+//			alert()
+		});
+		userBox.find('#canle').click(function(e){
+			userBox.hide();
+		});
 	};
 	function getName(){
 		var str = '', arr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
@@ -45,29 +57,33 @@ initModule(['jquery3','http'],function(req, exports, module)
 		}
 		return str;
 	}
+	
 	var dom = kit('#dom').html(), userid = kit('.search'), table = kit('.table');
-	function search(page){
+	function search(pageNum){
 		var params = {
 			cmd: '10001',
 			id: userid.val(),
-			page: page || 1,
+			page: pageNum || 1,
 			size: 7,
 		};
 		ajax(params, function(data){
-			if(data.code  != 0) return alert(data.errinfo);
+			if(data.code != 0) return alert(data.errinfo);
 			var list = data.list;
 			var str = kit.template(data.list, dom);
 			var btn = table.html(str).find('.fz button').click(function(e){
-				var params = {id: this.name};
+				
 				if(this.className == 'del'){
-					params.cmd = '10004';
+					var params = {id: this.name, cmd: '10004'};
+					ajax(params, function(data){
+						search();
+					});
 				}else if(this.className == 'updata'){
-					params.cmd = '10003';
+					userBox.show();
 				}
-				ajax(params, function(data){
-					search();
-				});
+				
 			});
+			paging.updata(pageNum, data.totalPage);
+			paging.show(data.total > 0);
 		});
 	}
 	

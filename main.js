@@ -8,28 +8,26 @@ var tool = require('./server/libs/tools.js');
 http.createServer(function(requrest, response){
 	var src = decodeURIComponent(requrest.url),
 		method = requrest.method.toLowerCase();
-	if(src =='/favicon.ico') return response.end();
-	if(src.indexOf('/json') == 0){
-		if(method == 'get'){
-			var get = url.parse(decodeURIComponent(src),true).query;
-			server(requrest, response, get);
-//			response.end(JSON.stringify(get));
-			return;
-		}
-		
+	if(src =='/favicon.ico' || method == 'options') return response.end();
+	
+	if(src.indexOf('/json') == 0 && method != 'get'){
 		var post = '';
 		requrest.on('data', function(chunk) {
 			post += chunk;
 		});
 		requrest.on('end', function(q) {
 			try{
-				if(post) post = JSON.parse(post);
-				else post = {};
+				post = post ? JSON.parse(post) : {};
 				server(requrest, response, post);
 			}catch(e){
 				tool.errcode(-2, response, e);
 			}
 		});
+		return;
+	} else if(src.indexOf('/get') == 0 && method == 'get'){
+		var get = url.parse(decodeURIComponent(src),true).query;
+//			server(requrest, response, get);
+		response.end(JSON.stringify(get));
 		return;
 	}
 	

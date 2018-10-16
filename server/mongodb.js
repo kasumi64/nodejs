@@ -22,27 +22,31 @@ function MongoDb(dbName, tableName){
 	function find(query, options={}){
 		if(options.fields){
 			options.fields._id = 0;
-		} else options.fields = {_id:0};
+		} else options.fields = {_id:0};//过滤_id, 0为不显自己, 1为只显示自己
 		return _table.find(query, options);
 	}
 		
 	this.list = async function(query, data, res, success, fail){
-		let size = data.size||10, page = data.page||1,
-			count = await _table.countDocuments(query);
-		page = --page * size;
+		let size = Math.floor(data.size||10), page = Math.floor(data.page||1),
+			total = await _table.countDocuments(query),
+			count = --page * size;
+		if(size < 1) size = 10;
+		if(page < 0) page = 0;
+		
 		let options = {
 			collation: {locale:'zh', numericOrdering:true},
 			sort: {timeStamp: -1},
-			skip: page, limit: size,
-			fields: {timeStamp: 0}
+			skip: count, limit: size, //skip分页跳过的条数，limit读取条数
+			fields: {timeStamp: 0} //过滤
 		};
 		find(query, options).toArray(function(err, result){
 			if(err) return fail(-102, res, err);
 			
-			var obj = {
-				list: result, total: count,
-				totalPage: Math.ceil(count/size),
-				lastPage: page*size+result.length==count
+			let obj = {
+				list: result, total,
+				currtPage: ++page,
+				totalPage: Math.ceil(total/size),
+				lastPage: result.length==0 ? true : (count+result.length==total)
 			}
 			if(success instanceof Function) success(res, obj);
 		});

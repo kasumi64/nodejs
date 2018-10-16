@@ -2,7 +2,7 @@ var exp = {}, fs = require('fs');
 var path = require('path');
 var router = require('../dynamic/router.js');
 var mime = require('./libs/mime.js');
-var url = require('url');
+//var url = require('url');
 
 function isEmpty(obj){
 	for(let k in obj) return false;
@@ -39,6 +39,7 @@ function read(obj, html, res){
 		}
 	});
 }
+
 function include(html){
 	var spring = {};
 	html.replace(/<#%(.+?)%#>/g, function(tag, p){
@@ -70,6 +71,7 @@ exp.load = function(requrest, response){
 		
 		if(type == '.html'){
 			buffer += '';
+			buffer = buffer.replace(/<!--[\s\S]+?-->/g, '');
 			let spring = include(buffer);
 			if(spring) return render(spring, buffer, response);
 		}

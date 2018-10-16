@@ -819,6 +819,7 @@ define('main/kit', function (require, exports, module)
 		/**简单的加入元素*/
 		function _simpleAppend(el)
 		{
+			if(this.isNull()) return this;
 			if(typeof(el)=="string"){
 				if(_regHtml.test(el)){
 					_div.innerHTML = el;

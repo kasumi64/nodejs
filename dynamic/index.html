@@ -17,6 +17,20 @@
 		.li1{width: 70px;}
 		.li2{width: 100px;}
 		.fz{font-size: 0;padding-top: 13px;line-height: 0;width: 100px;}
+		.userBox{display: none;position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,0.3);color: #555;}
+		.userBox .panle{margin: 100px auto 0;width: 360px;background: #FFF;border-radius: 6px;padding: 10px 0;}
+		.h2{font-size: 16px;text-align: center;color: dodgerblue;padding: 14px 0 8px;}
+		.userBox .left,.userBox .right{display: inline-block;vertical-align: top;}
+		.userBox .left{width: 35%;text-align: right;}
+		.userBox .right{width: 65%;}
+		.userBox li{margin-top: 10px;height: 24px;}
+		.userBox .left li{font-size: 14px;line-height: 24px;}
+		.userBox label{font-size: 14px;line-height: 24px;margin: 0 8px 0 2px;cursor: pointer;}
+		.userBox .radio *{vertical-align: middle;}
+		.userBox .input{height: 24px;padding: 0 10px;width: 160px;}
+		.updataBtn{text-align: center;margin: 20px 0 10px;}
+		#updata{margin-right: 40px;}
+		#canle{background: #FFF;color: #666;border: 1px solid #999;}
 	</style>
 	<script id="IDkit" src="../dynamic/libs/kit.js" type="text/javascript"></script>
 </head>
@@ -40,14 +54,34 @@
 			
 		</ul>
 	</div>
-	<div class=""></div>
-	<#%/dynamic/components/paging.html%#>
+	<div class="paging"></div>
+	<!--<#%/dynamic/components/paging/paging.html%#>-->
 	<div class="userBox">
-		<ul class="left">
-			<li></li>
-		</ul><ul class="right">
-			<li></li>
-		</ul>
+		<div class="panle">
+			<h2 class="h2">修改用户信息</h2>
+			<ul class="left">
+				<li>userID：</li>
+				<li>name：</li>
+				<li>age：</li>
+				<li>sex：</li>
+			</ul><ul class="right">
+				<li>
+					<input class="input" maxlength="6"/>
+				</li><li>
+					<input class="input" maxlength="6"/>
+				</li><li>
+					<input class="input" maxlength="2"/>
+				</li><li class="radio">
+					<input type="radio" name="sex" id="sex1" checked /><label for="sex1">男</label>
+					<input type="radio" name="sex" id="sex2" /><label for="sex2">女</label>
+					<input type="radio" name="sex" id="sex3" /><label for="sex3">保密</label>
+				</li>
+			</ul>
+			<div class="updataBtn">
+				<button id="updata">提 交</button>
+				<button id="canle">取 消</button>
+			</div>
+		</div>
 	</div>
 	<template id="dom">
 		<li>

@@ -1,0 +1,15 @@
+.plugin_paging {font-size: 0;margin: 10px;color: #4169E1;}
+.plugin_paging *{vertical-align: top;}
+.plugin_paging .btn{background: #FFF;font-size: 16px;color: #4169E1;border: 1px solid #1E90FF;height: 24px;padding: 0 5px;min-width: 30px;border-radius: 3px;}
+.plugin_paging .btn:active{box-shadow: 0px 0px 5px 1px rgba(102, 102, 102, 0.6) inset;}
+.plugin_paging #GO{font-size: 14px;}
+.plugin_paging .page_num{display: inline-block;margin: 0 4px;}
+.plugin_paging li{display: inline-block;font-size: 12px;line-height: 24px;width: 24px;height: 24px;border: 1px solid #1E90FF;
+	cursor: pointer;border-radius: 3px;text-align: center;}
+.plugin_paging li:active{box-shadow: 0px 0px 5px 1px rgba(102, 102, 102, 0.6) inset;}
+.plugin_paging .currtPage{box-shadow: 0px 0px 5px 1px rgba(102, 102, 102, 0.6) inset;}
+.plugin_paging .page_num li:not(:first-child){border-left: none;}
+.plugin_paging .page_go{margin: 0 10px;height: 24px;font-size: 14px;width: 60px;border: 1px solid #1E90FF;text-align: center;
+	color: #666;border-radius: 3px;}
+.plugin_paging .page_go::-webkit-input-placeholder{color: #AAA;}
+.emprty{font-size: 16px;line-height: 24px;text-align: center;}

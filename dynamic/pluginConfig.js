@@ -6,18 +6,17 @@
 (function(){
 	var config = {};
 	config.paths = {
-		libs:	'./dynamic/libs',
+		libs:	 './dynamic/libs',
+		plugins: './dynamic/components'
 	};
 	config.alias = {
 		'utils':	'libs/utils.js',
 		'axios':	'libs/axios.min.js',
+		'paging':	'plugins/paging/paging.js'
 	};
 	config.vars = {
 		kit: 'main/kit'
 	};
 	initModule.config(config);
-	var kit = kitRequire('{kit}');
-	var a=kit('script[src]');
-	console.log(a)
 }());
 
