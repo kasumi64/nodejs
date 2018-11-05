@@ -4,11 +4,19 @@ var page  = require('./server/loadPage.js');
 var server = require('./server/server.js');
 var tool = require('./server/libs/tools.js');
 
+//var socket = require('socket.io');
+//console.log(socket)
 
 http.createServer(function(requrest, response){
 	var src = decodeURIComponent(requrest.url),
 		method = requrest.method.toLowerCase();
-	if(src =='/favicon.ico' || method == 'options') return response.end();
+	if(src =='/favicon.ico' || method == 'options') {
+		response.writeHead(200, {
+			'Access-Control-Allow-Origin': '*',
+			'Access-Control-Allow-Headers': 'Content-Type,Content-Length,Authorization,Accept,X-Requested-With,yourHeaderFeild',
+		});
+		return response.end('options');
+	}
 	
 	if(src.indexOf('/json') == 0 && method != 'get'){
 		var post = '';
@@ -34,7 +42,7 @@ http.createServer(function(requrest, response){
 	if(method != 'get') return response.end();
 	page.load(requrest, response);
 	
-}).listen(8080);
+}).listen(80);
 
 
 //var events = require('events');
@@ -45,4 +53,4 @@ http.createServer(function(requrest, response){
 //eve.emit('type', 'EventEmitter');
 
 
-console.log('Server running at http://127.0.0.1:8080/');
+console.log('Server running at http://127.0.0.1/');

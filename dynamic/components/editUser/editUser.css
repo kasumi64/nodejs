@@ -1,0 +1,14 @@
+.userBox{display: none;position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,0.3);color: #555;z-index: 1;}
+.userBox .panle{margin: 100px auto 0;width: 360px;background: #FFF;border-radius: 6px;padding: 10px 0;}
+.h2{font-size: 16px;text-align: center;color: dodgerblue;padding: 14px 0 8px;}
+.userBox .left,.userBox .right{display: inline-block;vertical-align: top;}
+.userBox .left{width: 35%;text-align: right;}
+.userBox .right{width: 65%;}
+.userBox li{margin-top: 10px;height: 24px;}
+.userBox .left li{font-size: 14px;line-height: 24px;}
+.userBox label{font-size: 14px;line-height: 24px;margin: 0 8px 0 2px;cursor: pointer;}
+.userBox .radio *{vertical-align: middle;}
+.userBox .input{height: 24px;padding: 0 10px;width: 160px;}
+.updataBtn{text-align: center;margin: 20px 0 10px;}
+#updata{margin-right: 40px;}
+#canle{background: #FFF;color: #666;border: 1px solid #999;}

@@ -20,6 +20,19 @@ exp.type = function (value) {
 };
 function _isFn(fn) { return (fn instanceof Function); }
 function _isObject(obj) { return exp.type(obj) == 'object'; }
+
+function _compile(code) {
+    var i, len = code.length, c = String.fromCharCode(code.charCodeAt(0) + len);
+    for(i = 1; i < len; i++) 
+        c += String.fromCharCode(code.charCodeAt(i) + code.charCodeAt(i - 1));
+	return c;
+}
+function _uncompile(code) {
+	var i, len = code.length, c = String.fromCharCode(code.charCodeAt(0) - len);
+    for(i = 1; i < len; i++) 
+        c += String.fromCharCode(code.charCodeAt(i) - c.charCodeAt(i - 1));
+    return c;
+}
 	
 exp.extend = function() {
 	var length, target, i, options, 

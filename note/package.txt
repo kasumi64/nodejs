@@ -6,11 +6,17 @@ npm info jquery
 npm init --yes
 
 cnpm install jquery@3.20 //某个版本
-cnpm install express --save-dev
-cnpm install mysql --save-dev
-cnpm install ejs --save-dev
-cnpm install axios --save-dev
+cnpm install express --save
+cnpm install mysql --save
+cnpm install ejs --save
+cnpm install axios --save
 cnpm install mongodb --save-dev
+cnpm install body-parser --save
+cnpm instlal cookie-parser --save
+cnpm install express-session  --save
+cnpm install md5-node --save
+cnpm install multiparty --save
+
 cnpm install -g nodemon / supervisor / forever
 
 npm uninstall nodemon --save-dev/-S-D-O

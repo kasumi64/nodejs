@@ -65,8 +65,8 @@ exp.load = function(requrest, response){
 			"Access-Control-Allow-Methods": "PUT,POST,GET,DELETE,OPTIONS",
 			'Access-Control-Allow-Credentials': true,
 			'Access-Control-Allow-Headers': 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type',
-			'connection': 'keep-alive',
-//			'Set-Cookie': 'session=abcdefg'
+			'connection': 'keep-alive'
+//			,'Set-Cookie': 'session=abcdefg'
 		});
 		
 		if(type == '.html'){

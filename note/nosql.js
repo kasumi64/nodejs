@@ -7,6 +7,9 @@ db.dropDatabase();
 db.表名.insert({"id":"AA"});
 db.表名.drop()
 
+find(query, options).toArray(function(err, result){});
+find(query, options).forEach(function(err, result){});
+
 db.表名.find();全部 db.user.find({"age":20});等于
 db.表名.find({"age":{$gt:20}});大于  db.表名.find({"age":{$lt:20}});小于
 db.表名.find({"age":{$gte:20}});大于等于  db.表名.find({"age":{$lte:20}});小于等于
@@ -26,13 +29,14 @@ db.userInfo.find({$or: [{age: 22}, {age: 25}]}); 或
 db.userInfo.findOne();查询第一条数据
 
 db.userInfo.find({age: {$gte: 25}}).count();统计数量,如果要返回限制之后的记录数量，要使用 count(true)或者 count(非 0)db.users.find().skip(10).limit(5).count(true);
+db.userInfo.find({"state":{$type:'string'}}); 或$type=2,查找列里的某个类型
 
-db.user.updata({name:'AAA'}, {$set:{age:30}});注意:不出现$set 关键字,完整替换
+db.user.update({name:'AAA'}, {$set:{age:30}});注意:不出现$set 关键字,完整替换
 db.user.remove({age: 132});删除数据
 db.user.remove( { "borough": "Queens" }, { justOne: true } );删除一条数据
 
 1 。添加一个字段.  url 代表表名 , 添加字段 content。 字符串类型。
-db.url.update({}, {$set: {content:""}}, {multi: 1})。
+db.url.update({}, {$set: {content:""}, $currentDate: {lastModified:true, "time": {$type: "timestamp"} }, {multi: 1})。
 2  删除一个字段
 db.url.update({},{$unset:{'content':''}},false, true)
 

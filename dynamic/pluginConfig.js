@@ -12,7 +12,8 @@
 	config.alias = {
 		'utils':	'libs/utils.js',
 		'axios':	'libs/axios.min.js',
-		'paging':	'plugins/paging/paging.js'
+		'moment':	'libs/moment.js',
+		'paging':	'plugins/paging/paging.js',
 	};
 	config.vars = {
 		kit: 'main/kit'

@@ -22,7 +22,8 @@ function MongoDb(dbName, tableName){
 	function find(query, options={}){
 		if(options.fields){
 			options.fields._id = 0;
-		} else options.fields = {_id:0};//过滤_id, 0为不显自己, 1为只显示自己
+			options.fields.lastModified_ = 0;
+		} else options.fields = {_id:0, lastModified: 0};//过滤_id, 0为不显自己, 1为只显示自己
 		return _table.find(query, options);
 	}
 		
@@ -37,7 +38,7 @@ function MongoDb(dbName, tableName){
 			collation: {locale:'zh', numericOrdering:true},
 			sort: {timeStamp: -1},
 			skip: count, limit: size, //skip分页跳过的条数，limit读取条数
-			fields: {timeStamp: 0} //过滤
+			fields: {timeStamp_: 0} //过滤
 		};
 		find(query, options).toArray(function(err, result){
 			if(err) return fail(-102, res, err);
@@ -60,13 +61,19 @@ function MongoDb(dbName, tableName){
 			if(success instanceof Function) success(res);
 		});
 	};
-	this.updata = function(data, res, success, fail){
+	this.updateOne = function(data, res, success, fail){
 		var id = {id: data.id}
-		_table.updata(id, {$set: data}, function(err, result){
+		delete data.id;
+		_table.updateOne(id, {
+			$set: data, 
+			$currentDate: {lastModified: true} 
+		}, {upsert: false, multi: false}, //multi=True：是否对查询到的全部数据进行操作，upsert=True：如果找不到是否插入一新条数据
+		function(err, result){
 			if(err) {
 				return fail(-103, res, err);
 			}
 			if(success instanceof Function) success(res);
+			console.log('更新成功！',data);
 		});
 	};
 	this.deleteOne = function(data, res, success, fail){

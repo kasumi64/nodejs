@@ -1,10 +1,9 @@
 initModule([],function(req, exports, module)
 {
-	var doc = document, win = window, utils = req('utils');
-	var userBox, paging;
+	var doc = document, win = window, utils = req('utils'),
+		paging= req('paging')('.paging'), userBox = req('editUser');
 	
 	function init(){
-		paging= req('paging')('.paging');
 		paging.click(function(page){
 			search(page);
 		});
@@ -12,6 +11,7 @@ initModule([],function(req, exports, module)
 	function events(){
 		kit('#search').click(function(e){
 			search(1);
+			console.log(document.cookie)
 		});
 		
 		kit('#add').click(function(e){
@@ -26,8 +26,7 @@ initModule([],function(req, exports, module)
 				age: kit.randomNum(18, 50),
 				sex: kit.randomNum(1, 2)==1 ? '男' : '女',
 			};
-			ajax(params, function(data){
-				console.log(data);
+			utils.post(params, function(data){
 				search();
 			});
 		});
@@ -36,18 +35,10 @@ initModule([],function(req, exports, module)
 			var params = {
 				cmd: '10005'
 			};
-			ajax(params, function(data){
+			utils.post(params, function(data){
 				table.html('');
+				paging.show(false);
 			});
-		});
-		userBox = kit('.userBox').click(function(e){
-			if(e.target===this) userBox.hide();
-		});
-		userBox.find('#updata').click(function(e){
-//			alert()
-		});
-		userBox.find('#canle').click(function(e){
-			userBox.hide();
 		});
 	};
 	function getName(){
@@ -66,19 +57,23 @@ initModule([],function(req, exports, module)
 			page: pageNum || 1,
 			size: 7,
 		};
-		ajax(params, function(data){
+		utils.post(params, function(data){
 			if(data.code != 0) return alert(data.errinfo);
 			var list = data.list;
 			var str = kit.template(data.list, dom);
+			
+			var obj = list[0];
+			
 			var btn = table.html(str).find('.fz button').click(function(e){
-				
 				if(this.className == 'del'){
 					var params = {id: this.name, cmd: '10004'};
-					ajax(params, function(data){
+					utils.post(params, function(data){
 						search();
 					});
 				}else if(this.className == 'updata'){
-					userBox.show();
+					userBox.updata(list[this.name], function(){
+						search(pageNum);
+					});
 				}
 				
 			});
@@ -92,13 +87,13 @@ initModule([],function(req, exports, module)
 		var options = {
 			method: "POST",
 			headers: {
-				"Content-Type": "text/plain;charset=utf-8",
+				"Content-Type": "application/json;charset=utf-8",
 				"Accept": "application/json, text/plain, */*",
 			},
 			body: JSON.stringify(params)
 		};
 		
-		fetch('http://127.0.0.1:8080/json', options).then(response=>{
+		fetch('http://127.0.0.1/json', options).then(response=>{
 			_res = response;
 //			console.log(_res)
 			isTxt = false;
