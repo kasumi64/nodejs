@@ -49,6 +49,19 @@ function include(html){
 	if( isEmpty(spring) ) return false;
 	return spring;
 }
+
+function writeHead(res, type){
+	res.writeHead(200, {
+		'Content-Type': mime.type(type) + ';charset=utf-8;',
+		'Access-Control-Allow-Origin': '*',
+		"Access-Control-Allow-Methods": "GET,PUT,POST,GET,DELETE,OPTIONS,HEAD",
+		'Access-Control-Allow-Credentials': true,
+		'Access-Control-Allow-Headers': 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type',
+		'connection': 'keep-alive'
+//		,'Set-Cookie': 'session=abcdefg;Path=/;'
+	});
+}
+
 exp.load = function(requrest, response){
 	var src = router.path(decodeURIComponent(requrest.url));
 	fs.readFile('.' + src, function(e, buffer){
@@ -59,15 +72,7 @@ exp.load = function(requrest, response){
 			return response.end('404');
 		}
 		
-		response.writeHead(200, {
-			'Content-Type': mime.type(type) + ';charset=utf-8;',
-			'Access-Control-Allow-Origin': '*',
-			"Access-Control-Allow-Methods": "PUT,POST,GET,DELETE,OPTIONS",
-			'Access-Control-Allow-Credentials': true,
-			'Access-Control-Allow-Headers': 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type',
-			'connection': 'keep-alive'
-//			,'Set-Cookie': 'session=abcdefg'
-		});
+		writeHead(response, type);
 		
 		if(type == '.html'){
 			buffer += '';

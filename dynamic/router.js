@@ -1,9 +1,10 @@
 var path = require('path');
 
-var prefix = '/dynamic/', home ='/dynamic/index.html',
+var prefix = '/dynamic/page/', home ='/dynamic/page/index.html',
 router = {
 	'/': home, '/index': home, '/index.html': home,
-	'/login': '/dynamic/login.html',
+	'/login': '/dynamic/page/login.html',
+	'/search': '/dynamic/page/search.html'
 };
 exports.path = function(src){
 	var href = router[src];

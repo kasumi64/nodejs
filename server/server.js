@@ -22,7 +22,7 @@ function recall(res, obj){
 function failed(code, res, err){
 	var obj = msg.errinfo(code, 'errcn');
 	res.end( JSON.stringify(obj) );
-	console.log(err);
+	console.log(obj);
 }
 var cookies = {
 	set: function (res, val, opt){

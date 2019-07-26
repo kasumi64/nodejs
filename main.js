@@ -3,6 +3,9 @@ var url   = require('url');
 var page  = require('./server/loadPage.js');
 var server = require('./server/server.js');
 var tool = require('./server/libs/tools.js');
+var mime = require('./server/libs/mime.js');
+var fxDB = require('./filefx/fxDB.js');
+
 
 //var socket = require('socket.io');
 //console.log(socket)
@@ -53,4 +56,57 @@ http.createServer(function(requrest, response){
 //eve.emit('type', 'EventEmitter');
 
 
+var error = require('./filefx/libs/error.js');
+
+JSON._stringify_ = JSON.stringify;
+JSON.stringify = function (obj, replacer, space){
+	let str = '';
+	try{
+		str = JSON._stringify_(obj, replacer, space);
+	}catch(e){
+		str = "Object解析失败！"
+		console.log(str);
+	}
+	return str;
+}
+
+http.createServer(function(requrest, response){
+	let src = decodeURIComponent(requrest.url),
+		method = requrest.method.toLowerCase();
+	
+	mime.writeHead(requrest, response, '.json', {sessionID: 'ABC'});
+	
+	if(src =='/favicon.ico' || method == 'options') {
+		return response.end('options');
+	}
+	if(method != 'get'){
+		var post = '';
+		requrest.on('data', function(chunk) {
+			post += chunk;
+		});
+		requrest.on('end', function(q) {
+			// console.log('请求参数', post);
+			try{
+				post = post ? JSON.parse(post) : {};
+				fxDB.works(post, requrest, response);
+				// error.test(response);
+			}catch(e){
+				error.end('10', response, e);
+			}
+		});
+		return;
+	} else if(method == 'get'){
+		var get = url.parse(src, true).query;
+		var crawler = require('./filefx/crawler.js');
+		crawler.search(get, response);
+		// response.end(JSON.stringify(get));
+		return;
+	}
+	
+	
+	return response.end();
+}).listen(8088);
+
+
 console.log('Server running at http://127.0.0.1/');
+console.log('Server running at http://localhost:8088/');

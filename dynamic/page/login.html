@@ -9,17 +9,26 @@
 	body{font-size: 0;background: #333;margin: 0;}
 	.loginPanle{margin: 1.5rem auto;border: 1px solid #4169E1;border-radius: 6px;width: 6.8rem;height: 6.0rem;}
 </style>
-	<script src="../dynamic/libs/kit.js"></script>
+	<!--<script src="../dynamic/libs/kit.js"></script>-->
 	<script>
-		kit.screenFix();
+//		kit.screenFix();
 		//Jade、EJS、Handlebars 
+		function ck(){
+			fetch('http://127.0.0.1/json',{
+				method:'post'
+			}).then(function(e){
+				return e.text()
+			}).then(function(data){
+				console.log(data)
+			});
+		}
 	</script>
 </head>
 
 <body>
 	<div>
 		我是登陆页面；
-		
+		<button onclick="ck()">bas</button>
 	</div>
 </body>
 </html>

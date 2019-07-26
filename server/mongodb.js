@@ -82,7 +82,7 @@ function MongoDb(dbName, tableName){
 				return fail(-104, res, err);
 			}
 			if(success instanceof Function) success(res);
-			console.log('删除成功！'+data.id);
+			console.log('删除一条数据成功！'+data.id);
 		});
 	};
 	this.remove = function(data, res, success, fail){
@@ -91,7 +91,7 @@ function MongoDb(dbName, tableName){
 				return fail(-105, res, err);
 			}
 			if(success instanceof Function) success(res);
-			console.log('删除多条成功！');
+			console.log('清空数据库成功！');
 		});
 	};
 	

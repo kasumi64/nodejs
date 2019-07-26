@@ -1,6 +1,7 @@
 MongoDb
-mongod --dbpath D:\mongodb
-user 库名
+mongod --dbpath D:\mongodb ,//起动
+mongo 127.0.0.1:27017 //连接远程
+use 库名
 show dbs
 show collections
 db.dropDatabase();
@@ -14,7 +15,7 @@ db.表名.find();全部 db.user.find({"age":20});等于
 db.表名.find({"age":{$gt:20}});大于  db.表名.find({"age":{$lt:20}});小于
 db.表名.find({"age":{$gte:20}});大于等于  db.表名.find({"age":{$lte:20}});小于等于
 db.user.find({"id":1230,"age":20});多个条件, 等于
-db.user.find("age":{$gte:20,$lte:30}});多个条件,大于等于20,小于等于30
+db.user.find({"age":{$gte:20,$lte:30}});多个条件,大于等于20,小于等于30
 db.user.find({"title":/文字/});模糊查询 db.user.find({"title":/^zh/});以zh开头的；
 
 db.user.find({}, {age: true}); 只查一列，某个字段
@@ -28,7 +29,8 @@ db.userInfo.find({age: 22, age: 25}); 并且
 db.userInfo.find({$or: [{age: 22}, {age: 25}]}); 或
 db.userInfo.findOne();查询第一条数据
 
-db.userInfo.find({age: {$gte: 25}}).count();统计数量,如果要返回限制之后的记录数量，要使用 count(true)或者 count(非 0)db.users.find().skip(10).limit(5).count(true);
+db.userInfo.find({age: {$gte: 25}}).count();统计数量,如果要返回限制之后的记录数量，,
+	要使用 count(true)或者 count(非 0)db.users.find().skip(10).limit(5).count(true);
 db.userInfo.find({"state":{$type:'string'}}); 或$type=2,查找列里的某个类型
 
 db.user.update({name:'AAA'}, {$set:{age:30}});注意:不出现$set 关键字,完整替换

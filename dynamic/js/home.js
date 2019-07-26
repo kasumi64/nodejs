@@ -2,6 +2,7 @@ initModule([],function(req, exports, module)
 {
 	var doc = document, win = window, utils = req('utils'),
 		paging= req('paging')('.paging'), userBox = req('editUser');
+	var axios = req('axios');
 	
 	function init(){
 		paging.click(function(page){
@@ -39,6 +40,24 @@ initModule([],function(req, exports, module)
 				table.html('');
 				paging.show(false);
 			});
+		});
+		kit('#ck').click(function(e){
+			var param = {
+				cmd: '9000',
+				url: 'http://localhost:8088/search',
+				method: 'get'
+			};
+			param.params = {
+				abc: 'ABC',
+				num: 123
+			};
+			axios(param).then(function(res){
+				var data = res.data, args;
+				if(res.config.data) args = JSON.parse(res.config.data)
+				console.log(data)
+				
+				
+			})
 		});
 	};
 	function getName(){

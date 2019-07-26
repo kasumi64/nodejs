@@ -1,6 +1,6 @@
 var path = require('path');
 
-var prefix = '/dynamic/', home ='/dynamic/index.html',
+var prefix = '/dynamic/', home ='/dynamic/index.html',//suffix，
 router = {
 	'/': home, '/index': home, '/index.html': home,
 	'/login': '/dynamic/login.html',

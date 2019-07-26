@@ -4,6 +4,9 @@ npm list --depth=0 --global
 npm info jquery
 
 npm init --yes
+cnpm install webpack --save-dev //-D
+cnpm install --save-dev webpack-cli //-D
+vue init webpack fbcs_MX
 
 cnpm install jquery@3.20 //某个版本
 cnpm install express --save
@@ -16,6 +19,9 @@ cnpm instlal cookie-parser --save
 cnpm install express-session  --save
 cnpm install md5-node --save
 cnpm install multiparty --save
+cnpm install superagent --save // http的库,可以发起 get 或 post 请求。
+cnpm install cheerio --save // Node.js 版的 jquery
+cnpm install iconv-lite --save // 乱码转码
 
 cnpm install -g nodemon / supervisor / forever
 
@@ -25,3 +31,10 @@ packaga.json中库的版本号：
 （~）更新最后一位，修复版本的bug；
 （^）更新到中间一位，小版本的更新；
 （*）更新到最新的版本
+
+
+用如下命令就可以全局安装Bower
+
+npm install -g bower
+
+运行“npm audit fix”修复它们，或运行“npm audit”获取详细信息
