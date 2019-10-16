@@ -4,7 +4,7 @@ var page  = require('./server/loadPage.js');
 var server = require('./server/server.js');
 var tool = require('./server/libs/tools.js');
 var mime = require('./server/libs/mime.js');
-var fxDB = require('./filefx/fxDB.js');
+var strategy = require('./StrategyPattern.js');
 
 
 //var socket = require('socket.io');
@@ -56,8 +56,6 @@ http.createServer(function(requrest, response){
 //eve.emit('type', 'EventEmitter');
 
 
-var error = require('./filefx/libs/error.js');
-
 JSON._stringify_ = JSON.stringify;
 JSON.stringify = function (obj, replacer, space){
 	let str = '';
@@ -73,26 +71,32 @@ JSON.stringify = function (obj, replacer, space){
 http.createServer(function(requrest, response){
 	let src = decodeURIComponent(requrest.url),
 		method = requrest.method.toLowerCase();
-	
-	mime.writeHead(requrest, response, '.json', {sessionID: 'ABC'});
+	requrest.url = src;
 	
 	if(src =='/favicon.ico' || method == 'options') {
+		mime.writeHead(requrest, response, '.json', {sessionID: 'ABC'});
 		return response.end('options');
 	}
+	// console.log(requrest)
 	if(method != 'get'){
+		let type = requrest.headers['content-type'];
+		// console.log('main', type);
+		//上传文件
+		if(type.indexOf('multipart/form-data') > -1){
+			strategy.file(requrest, response);
+			return;
+		} 
+		
+		var received = 0;
 		var post = '';
 		requrest.on('data', function(chunk) {
+			// 停止接收数据，触发end()
+			// received += chunk.length;
+			// req.destroy();
 			post += chunk;
 		});
 		requrest.on('end', function(q) {
-			// console.log('请求参数', post);
-			try{
-				post = post ? JSON.parse(post) : {};
-				fxDB.works(post, requrest, response);
-				// error.test(response);
-			}catch(e){
-				error.end('10', response, e);
-			}
+			strategy.accept(post, requrest, response)
 		});
 		return;
 	} else if(method == 'get'){
@@ -102,7 +106,6 @@ http.createServer(function(requrest, response){
 		// response.end(JSON.stringify(get));
 		return;
 	}
-	
 	
 	return response.end();
 }).listen(8088);

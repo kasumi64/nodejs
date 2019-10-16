@@ -8,17 +8,18 @@ cnpm install webpack --save-dev //-D
 cnpm install --save-dev webpack-cli //-D
 vue init webpack fbcs_MX
 
-cnpm install jquery@3.20 //某个版本
-cnpm install express --save
-cnpm install mysql --save
-cnpm install ejs --save
+cnpm install jquery@3.20          //某个版本
+cnpm install express --save      //模板引擎
+cnpm install mysql --save    
+cnpm install ejs --save       //模板引擎
 cnpm install axios --save
 cnpm install mongodb --save-dev
 cnpm install body-parser --save
 cnpm instlal cookie-parser --save
 cnpm install express-session  --save
 cnpm install md5-node --save
-cnpm install multiparty --save
+cnpm install multiparty --save //解析FormData数据
+cnpm install formidable --save //解析FormData数据
 cnpm install superagent --save // http的库,可以发起 get 或 post 请求。
 cnpm install cheerio --save // Node.js 版的 jquery
 cnpm install iconv-lite --save // 乱码转码

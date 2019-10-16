@@ -501,7 +501,7 @@ exports.writeHead = function writeHead(req, res, ext, cookie){
 	let head = {
 		'Content-Type': type + ';charset=utf-8;',
 		'Access-Control-Allow-Origin': '*',
-		"Access-Control-Allow-Methods": "GET,PUT,POST,GET,DELETE,OPTIONS,HEAD",
+		"Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS,HEAD,PATCH,CONNECT",
 		'Access-Control-Allow-Credentials': true,
 		'Access-Control-Allow-Headers': 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type',
 		'connection': 'keep-alive'

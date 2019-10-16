@@ -47,6 +47,19 @@ function MongoDb(dbName, tableName){
 		}
 		return origin;
 	}
+	/**
+	 * db.person.find( { age: { $mod: [ 2, 0 ] } } )
+	 * $mod会将查询的值除以第一个给定的值，若余数等于第二个给定的值，则返回该结果。
+	 * $not与正则表达式联合使用时极为有效，用来查找那些与特定模式不匹配的文档。
+	 * $in  { field: { $in: [<value1>, <value2>, ... <valueN> ] } }
+	 * 		匹配数组中的任一值
+	 * $nin  db.tianyc02.find({age:{$nin:[11,22]}})
+	 * 		不匹配数组中的值
+	 * $or  查询age<20或者address是beijing的文档：
+	 *		db.person.find( { $or: [ { age: { $lt: 20 } }, { address: "beijing" } ] } )
+	 * $and
+	 * @param {Object} val
+	 */
 	function sign(val){
 		let sign = {
 			'>': '$gt', '>=': '$gte', '=': '$eq', 
@@ -77,24 +90,28 @@ function MongoDb(dbName, tableName){
 	}
 	
 	this.getList = async function(query, data, fields){
-		let size = Math.floor(data.size||10), page = Math.floor(data.page||1),
-			count = --page * size, total;
-		if(size < 1) size = 10;
-		if(page < 0) page = 0;
+		let size = Math.floor(data.pageSize||20), page, count, total;
+		page = Math.floor(data.currentPage||1);
+		if(size < 1) size = 20;
+		if(page < 1) page = 1;
+		count = --page * size;
 		
-		total = await _table.countDocuments(query); //countDocuments estimatedDocumentCount
+		total = await _table.countDocuments(condition(query)); //countDocuments estimatedDocumentCount
 		
 		let options = {
 			collation: {locale:'zh', numericOrdering:true},
 			sort: {createTimestamp: -1},
 			skip: count, limit: size, //skip分页跳过的条数，limit读取条数
-			projection: {createTimestamp: 0} //过滤
+			projection: {createTimestamp: 0}, //过滤
+			timeout: true,
+			maxTimeMS: 5 * 1000
 		};
 		if(fields) options.projection = fields;
+		
 		return this.find(query, options).then(result => {
 			let obj = {
-				lists: result, total,
-				currtPage: ++page,
+				lists: result, totalSize: total,
+				currentPage: ++page,
 				totalPage: Math.ceil(total/size),
 				lastPage: result.length==0 ? true : (count+result.length==total)
 			}
@@ -122,15 +139,33 @@ function MongoDb(dbName, tableName){
 	
 	this.insertOne = function(data, options){
 		console.log('添加一条数据！');
+		if(!options) {
+			options = {
+				$currentDate: {lastModified: true}
+			};
+		}
 		return _table.insertOne(data, options);
 	};
 	
-	this.updateOne = function(filter, data){
+	this.insertMany = function(data, options){
+		console.log('添加多条数据！');
+		if(!options) {
+			options = {
+				ordered: false,
+				$currentDate: {lastModified: true}
+			};
+		}
+		return _table.insertMany(data, options);
+	};
+	
+	this.updateOne = function(filter, update, option){
 		console.log('修改数据！');
+		 // upsert=True：如果找不到是否插入一新条数据，multi=True：是否对查询到的全部数据进行操作
+		let options = Object.assign({upsert: false, multi: false}, option||{});
 		return _table.updateOne(filter, {
-			$set: data, 
+			$set: update, 
 			$currentDate: {lastModified: true} 
-		}, {upsert: false, multi: false}); //multi=True：是否对查询到的全部数据进行操作，upsert=True：如果找不到是否插入一新条数据
+		}, options);
 	};
 	
 	this.deleteOne = function(filter, options){
