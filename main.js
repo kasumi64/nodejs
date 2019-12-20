@@ -101,9 +101,12 @@ http.createServer(function(requrest, response){
 		return;
 	} else if(method == 'get'){
 		var get = url.parse(src, true).query;
-		var crawler = require('./filefx/crawler.js');
-		crawler.search(get, response);
-		// response.end(JSON.stringify(get));
+		if(/^\/crawler/.test(src)){
+			var crawler = require('./filefx/crawler.js');
+			crawler.search(get, response);
+		} else if(/^\/json/.test(src)){
+			strategy.get(get, requrest, response);
+		} else response.end(JSON.stringify(get));
 		return;
 	}
 	

@@ -128,7 +128,7 @@ accept['600004'] = async function updateUser(params, res, now){
 	
 	let id = {userID: params.userID};
 	return account.updateOne(id, params).then(function() {
-		if(now !== true) error.end('0', res);
+		if(now !== true) error.send({webUserFlag: 1}, res);
 		return true;
 	}).catch(e => {
 		error.end('-103', res, e);
@@ -137,7 +137,7 @@ accept['600004'] = async function updateUser(params, res, now){
 };
 accept['600007'] = async function updateUserNow(params, res){
 	let add = await accept['600004'](params, res, true);
-	if(add)  error.send({uuid: 'uuid'+getRandID()}, res);
+	if(add)  error.send({uuid: 'uuid'+getRandID(), webUserFlag: 1}, res);
 	return true;
 };
 accept['600005'] = async function deleteUser(params = {}, res, req){
@@ -669,7 +669,11 @@ accept['600065'] = async function cuCompare(params, res){
 	if(cu.length == 0) return true;
 	for (i = 0; i < data.lists.length; i++) {
 		obj = data.lists[i];
-		obj.detail = cu[random(0, cu.length-1)].cuName;
+		let str = 'cu is file:[';
+		str += cu[random(0, cu.length-1)].cuName;
+		str += ', ' + cu[random(0, cu.length-1)].cuName;
+		if(i%2) str += ', SUp-10';
+		obj.detail = str + ']';
 	}
 	error.send(data, res);
 	return true

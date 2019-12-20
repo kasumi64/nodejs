@@ -502,10 +502,17 @@ exports.writeHead = function writeHead(req, res, ext, cookie){
 		'Content-Type': type + ';charset=utf-8;',
 		'Access-Control-Allow-Origin': '*',
 		"Access-Control-Allow-Methods": "GET,POST,PUT,DELETE,OPTIONS,HEAD,PATCH,CONNECT",
-		'Access-Control-Allow-Credentials': true,
-		'Access-Control-Allow-Headers': 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type',
-		'connection': 'keep-alive'
-		// ,'Set-Cookie': 'session=abcdefg;Path=/;'
+		// 'Access-Control-Allow-Headers': 'DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type' + 
+		// 	',Date,Server,X-Powered-By,Content-Length,Connection,Expires,Last-Modified,Pragma,Content-Disposition',
+		// "Access-Control-Max-Age": 604800, //预检请求的有效期，单位为秒(7天)
+		// 'Access-Control-Allow-Credentials': true,
+		// 'Access-Control-Expose-Headers': 'Location',
+		'Connection': 'keep-alive',
+		// "Content-Disposition": "attachment",
+		// "Pragma": "No-cache",
+		// "Cache-Control": "No-cache",
+		// "Expires": 0,
+		// 'Set-Cookie': 'session=abcdefg;Path=/;'
 	}
 	if(typeof(cookie)=="object") {
 		head.Cookie = head['Set-Cookie'] = pingCookie(cookie);

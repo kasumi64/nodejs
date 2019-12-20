@@ -24,7 +24,18 @@ exp.file = function (requrest, response){
 exp.accept = function (data, requrest, response)
 {
 	// console.log('StrategyPattern', requrest.headers);
-	fbcs(data, requrest, response);
+	// console.log(data);
+	let src = requrest.url;
+	if(src.indexOf('/json')>-1) {
+		mime.writeHead(requrest, response, '.json');
+		response.end('{"errcode":0,"errinfo": "POST Json OK!"}');
+	} else fbcs(data, requrest, response);
+};
+exp.get = function (data, requrest, response)
+{
+	mime.writeHead(requrest, response, '.json');
+	// console.log('StrategyPattern', requrest.headers);
+	response.end('{"errcode":0,"errinfo": "Get Json OK!"}');
 };
 
 // 数据库json请求

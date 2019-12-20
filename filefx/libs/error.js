@@ -41,17 +41,18 @@ exp.send = function(obj={}, res){
 }
 
 exp.test = function(res){
-	let debugRes = {errcode:'0', lists:[], errinfo: '这是个测试接口.', defaultPasswd: 'ABCDEFG', totalSize: 10};
+	let debugRes = {errcode:'0', lists:[], errinfo: '这是个测试接口.', defaultPasswd: 'ABCDEFG', totalSize: 10,webUserFlag:1};
 	let arr = [];
 	for (var i = 0; i < 10; i++) {
 		let obj = {userID: '01'+i, userName: 'userName'+i,userID1: '006', nodeName: '深圳'+i, cuName: 'CU-1',
 		operationTime: 1555553114000, operationType: i%2, type: 4, fileName: 'ABC', reviewer: 'reviewer',
-		linkGroupName: '', inZone: '', webUserFlag: 1, errInfo: '用户操作结果：\nsuccess',
+		linkGroupName: '', inZone: '', webUserFlag: 1, errInfo: '用户操作结果：\nsuccess', serviceID: '01'+i,
 		exeState: i%4+1, feedbackState: i%3+1 ,legal: i%3, legalInfo: '合法详情', userType: '4'};
 		obj.bizKey = '01'+i;
 		if(i%2){
 			obj.isModifyFlag = 1;
 			obj.remark = 'remark'+i;
+			obj.errcode = '0';
 		}
 		arr.push(obj);
 	}

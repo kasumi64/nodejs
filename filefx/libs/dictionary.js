@@ -15,8 +15,8 @@ exp.area = [
 
 //所在组
 exp.group = [
-	{groupID: 'CU-1'}, {groupID: 'CU-2'},
-	{groupID: 'SU-1'}, {groupID: 'XZ-1'},
+	{groupID: 'CU-1'}, {groupID: 'CU-2'}, {groupID: 'CU-13'},
+	{groupID: 'SU-1'}, {groupID: 'XZ-1'}, {groupID: 'SU-10'}
 ];
 //操作类型
 exp.operationType = [
@@ -61,7 +61,9 @@ exp.cusu = [
 	{nodeName:'深圳', cuName:'CU-2', errcode:'0', errinfo: 'ok', operationType:'增加通信关系'},
 	{nodeName:'北京', cuName:'CU-1', errcode:'0', errinfo: 'ok', operationType:'用户'},
 	{nodeName:'上海', cuName:'SU-1', errcode:'1', errinfo: 'call rpc:failed', operationType:'运维'},
-	{nodeName:'广州', cuName:'XZ-1', errcode:'0', errinfo: 'ok', operationType:'扩展信息'}
+	{nodeName:'广州', cuName:'XZ-1', errcode:'0', errinfo: 'ok', operationType:'扩展信息'},
+	{nodeName:'北京', cuName:'CU-13', errcode:'0', errinfo: 'ok', operationType:'用户'},
+	{nodeName:'广州', cuName:'XZ-10', errcode:'0', errinfo: 'ok', operationType:'扩展信息'},
 ];
 
 module.exports = exp;

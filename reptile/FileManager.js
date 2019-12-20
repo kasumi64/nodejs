@@ -8,13 +8,13 @@ const error = require('../filefx/libs/error.js');
 
 //入口
 exports.classify = function(req, res) {
-	// formidableUP(req, res);
+	formidableUP(req, res);
+	// multiparty(req, res);
 	
-	
-	// return
+	return
 	
 	let src = req.url;
-	console.log(src)
+	console.log("file:", src)
 	if (src.indexOf('/upload/') > -1) {
 		if (src.indexOf('/txt') > -1) getBuffer(req, res);
 	} else if (src.indexOf('/download/') > -1) {
@@ -112,15 +112,31 @@ function formidableUP(req, res, callback) {
 	let  form = new Formidable.IncomingForm(formData);
 	
 	form.parse(req, function(err, fields, files) {
-		let fl = files.file;
-		fs.rename(fl.path, path.join(dir, fl.name), function(err){
-			if(err) return error.end('-1', res);
-			error.end('0', res);
-			// callback(err,obj);
-		});
+		// console.log(fields, files);
+		// return error.end('0', res);
+		if(err) return error.end('-1', res, err);
+		let fl, arr = files.file;
+		if(!arr) return error.end('0', res);
+		if(!(arr instanceof Array)) arr = [arr];
+		for (let i = 0; i < arr.length; i++) {
+			fl = arr[i];
+			if(!fl.name) fl.name = 'temp.txt';
+			console.log(fl.name);
+			fs.rename(fl.path, path.join(dir, fl.name), function(err){
+				if(err) return error.end('-1', res, err);
+				// callback(err,obj);
+			});
+		}
+		error.end('0', res);
 	});
 	return true;
 }
+
+function getType(obj){
+		var tostr = Object.prototype.toString;
+		var tp = tostr.call(obj).toLocaleLowerCase();
+		return tp.replace(/\[object |\]/g, '');
+	}
 
 function multiparty(req, res, callback){
 	let dir = "./reptile/upload";
@@ -136,12 +152,21 @@ function multiparty(req, res, callback){
 	let  form = new Multiparty.Form(formData);
 	
 	form.parse(req, function(err, fields, files) {
-		let fl = files.file;
-		fs.rename(fl.path, path.join(dir, fl.name), function(err){
-			if(err) return error.end('-1', res);
-			error.end('0', res);
-			// callback(err,obj);
-		});
+		// console.log(err, fields, files);
+		// return error.end('0', res);
+		if(err) return error.end('-1', res, err);
+		let fl, arr = files.file;
+		if(!arr) return error.end('0', res);
+		for (let i = 0; i < arr.length; i++) {
+			fl = arr[i];
+			if(!fl.originalFilename) fl.originalFilename = 'temp.txt';
+			console.log(fl.originalFilename);
+			fs.rename(fl.path, path.join(dir, fl.originalFilename), function(err){
+				if(err) return error.end('-1', res);
+				// callback(err,obj);
+			});
+		}
+		error.end('0', res);
 	});
 	return true;
 }
