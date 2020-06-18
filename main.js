@@ -11,6 +11,7 @@ var strategy = require('./StrategyPattern.js');
 //console.log(socket)
 
 http.createServer(function(requrest, response){
+	// console.log(requrest.url)
 	var src = decodeURIComponent(requrest.url),
 		method = requrest.method.toLowerCase();
 	if(src =='/favicon.ico' || method == 'options') {

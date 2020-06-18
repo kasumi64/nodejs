@@ -45,7 +45,7 @@ exp.test = function(res){
 	let arr = [];
 	for (var i = 0; i < 10; i++) {
 		let obj = {userID: '01'+i, userName: 'userName'+i,userID1: '006', nodeName: '深圳'+i, cuName: 'CU-1',
-		operationTime: 1555553114000, operationType: i%2, type: 4, fileName: 'ABC', reviewer: 'reviewer',
+		operationTime: 1555553114000, operationType: 1, type: 1, fileName: 'ABC', reviewer: 'reviewer',
 		linkGroupName: '', inZone: '', webUserFlag: 1, errInfo: '用户操作结果：\nsuccess', serviceID: '01'+i,
 		exeState: i%4+1, feedbackState: i%3+1 ,legal: i%3, legalInfo: '合法详情', userType: '4'};
 		obj.bizKey = '01'+i;

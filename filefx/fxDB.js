@@ -711,7 +711,8 @@ accept['600083'] = function dispatch(params, res){
 	let obj = {endQueryFlag: 1};
 	obj.type = params.type || 0;
 	obj.lists = dict.cusu;
-	error.send(obj, res);
+	setTimeout(() => { error.send(obj, res); }, 1000);
+	// error.send(obj, res);
 	return true;
 };
 accept['600000'] = function area(params, res, req){
