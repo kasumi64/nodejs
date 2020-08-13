@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>canvas</title>
+	<style>
+		.box{text-align: center;}
+		canvas{border: #00BFFF 1px solid;}
+	</style>
+</head>
+<body>
+	<div class="box">
+		<h1>CANVAS</h1>
+	</div>
+	<img style="width: 300px;" src="./wallhaven-yml8wd.webp" />
+	<script src="js/lineChart.js"></script>
+<script>
+	!function(){
+		// line();
+		
+		
+		
+		
+		
+	}();
+
+
+	function line(){
+		var box = document.querySelector('.box');
+		var pen = document.createElement('canvas').getContext('2d');
+		box.appendChild(pen.canvas);
+		pen.canvas.width = 600;
+		pen.canvas.height = 80;
+		
+		function drawLine(color){
+			pen.beginPath();
+			pen.moveTo(10, 10);
+			pen.lineTo(50, 50);
+			pen.lineTo(100, 10);
+			pen.strokeStyle = color;
+			pen.lineWidth = 2;
+			pen.lineCap = 'round';
+			pen.lineJoin = 'round';
+			pen.setLineDash([5,10]);
+			pen.lineDashOffset = 5;
+			pen.closePath();
+			pen.stroke();
+		}
+		drawLine("#F00");
+		
+		function drawGradients(){
+			pen.lineWidth = 30;
+			pen.lineDashOffset = 0;
+			for (var i = 0; i < 255; i++) {
+				pen.beginPath();
+				pen.moveTo(150 + i-1, 30);
+				pen.lineTo(150 + i, 30);
+				pen.strokeStyle = `rgb(${i}, 0, 0)`;
+				pen.stroke();
+			}
+		}
+		drawGradients();
+	};
+	
+</script>
+</body>
+</html>

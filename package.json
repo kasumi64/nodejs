@@ -1,0 +1,25 @@
+{
+	"name": "NodeJS",
+	"version": "1.0.20200715",
+	"description": "nodejs服务器",
+	"main": "main.js",
+	"scripts": {
+		"serve": "nodemon",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"dependencies": {
+		"dayjs": "^1.8.29",
+		"formidable": "^1.2.2",
+		"http-proxy": "^1.18.1",
+		"md5": "^2.2.1",
+		"mime": "^2.4.6",
+		"mongodb": "^3.5.9"
+	},
+	"devDependencies": {
+		"module-alias": "^2.2.2"
+	},
+	"keywords": [],
+	"author": "kasumi",
+	"license": "ISC",
+	"private": true
+}

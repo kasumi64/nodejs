@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>NodeJS页面</title>
+<style>
+	*{box-sizing: border-box;padding: 0;margin: 0;line-height: 1;outline: none;}
+	body{padding: 8px;}
+	ul,ol,il{list-style: none;}
+	h1{text-align: center;margin-bottom: 20px;}
+	button{border: 1px solid deepskyblue;font-size: 14px;padding: 7px 20px;cursor: pointer;}
+	button:active{background: #00BFFF;color: #FFF;}
+	input{font-size: 14px;padding: 0 10px;height: 30px;}
+</style>
+</head>
+<body>
+	<h1>NodeJS页面</h1>
+	<input />
+	<button onclick="check()">点击</button>
+<script>
+	function check(){
+		var data = {
+			num:123,
+			str: 'ABC'
+		};
+		fetch('http://127.0.0.1/post', {
+			method: 'POST', // or 'PUT'
+				body: JSON.stringify(data), // data can be `string` or {object}!
+				headers: new Headers({
+				'Content-Type': 'application/json'
+			})
+		})
+	}
+</script>
+</body>
+</html>
