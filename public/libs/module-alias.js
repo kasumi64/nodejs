@@ -8,8 +8,8 @@ function resolve(src = ''){
 }
 
 moduleAlias.addAliases({
-	'#': resolve('public'),
-	'#utils': resolve('public/libs/utils.js'),
+	'$_': resolve('public'),
+	'$_utils': resolve('public/libs/utils.js')
 });
 
 const package = {

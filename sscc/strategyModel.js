@@ -1,25 +1,24 @@
-var { resolve } = require('#utils');
-const moduleAlias = require('module-alias');
-moduleAlias.addAliases({
-	'@sscc': resolve('sscc')
-});
+// const alias = require('$_/libs/module-alias');
+// alias.addAliases({
+// 	'@sscc': 'sscc'
+// });
 
-const server =  require('#/http/httpServer.js');
-const header = require('#/http/header.js');
+const $_server =  require('$_/http/httpServer.js');
+const $_header = require('$_/http/header.js');
 
 var error = require('./libs/error.js');
 var fxDB = require('./fx/fxDB.js');
 var mxDB = require('./mx/mxDB.js');
 
 
-server.run(init, 8088);
+$_server.run(init, 8088);
 
 function init(requrest, response){
 	var method = requrest.method.toLowerCase();
 	requrest.url = decodeURIComponent(requrest.url);
 	
 	if((/post|put|delete/i).test(method)){
-		header.write(requrest, response, '.json');
+		$_header.write(requrest, response, '.json');
 		var post = '';
 		requrest.on('data', function(chunk) {
 			post += chunk;

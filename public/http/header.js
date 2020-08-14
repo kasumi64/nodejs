@@ -28,7 +28,7 @@ function toString(obj){
 	return str.replace('&', '');
 }
 
-exports.type = function type(str){
+exports.mime = function type(str){
 	let type = mime[str] || "text/html";
 	return type;
 }

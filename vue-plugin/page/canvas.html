@@ -3,27 +3,26 @@
 <head>
 	<meta charset="utf-8">
 	<title>canvas</title>
+	<!-- <link rel="shortcut icon" href="pic/ico/nodejs03.ico" type="image/x-icon"> -->
 	<style>
 		.box{text-align: center;}
 		canvas{border: #00BFFF 1px solid;}
 	</style>
+	<script src="$_/libs/CMD.js"></script>
 </head>
 <body>
 	<div class="box">
 		<h1>CANVAS</h1>
 	</div>
-	<img style="width: 300px;" src="./wallhaven-yml8wd.webp" />
-	<script src="js/lineChart.js"></script>
+	<!-- <img style="width: 300px;" src="pic/wallhaven-yml8wd.webp" /> -->
 <script>
-	!function(){
+	$module.init(['js/jsCfg'], function(require, exports, module) {
 		// line();
+		var axes = require('js/lineChart.js');
 		
 		
 		
-		
-		
-	}();
-
+	});
 
 	function line(){
 		var box = document.querySelector('.box');

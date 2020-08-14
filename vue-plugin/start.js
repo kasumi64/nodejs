@@ -1,10 +1,10 @@
 const url   = require('url');
 
-const server =  require('#/http/httpServer.js');
-const header = require('#/http/header.js');
+const $_server =  require('$_/http/httpServer.js');
+const $_header = require('$_/http/header.js');
 const page = require('./page/loadAssets.js');
 
-server.run(listen);
+$_server.run(listen);
 
 function listen(requrest, response){
 	let {src, method} = requrest;
@@ -19,7 +19,7 @@ function listen(requrest, response){
 		page.loader(requrest, response);
 		return
 	} else if((/post|put|delete/i).test(method)){
-		header.write(requrest, response);
+		$_header.write(requrest, response);
 		var post = '';
 		requrest.on('data', function(chunk) {
 			post += chunk;

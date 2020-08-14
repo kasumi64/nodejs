@@ -1,8 +1,8 @@
 const url = require('url');
 const path = require('path');
 
-const header = require('#/http/header.js');
-const file = require('#/libs/fs.js');
+const $_header = require('$_/http/header.js');
+const $_file = require('$_/libs/fs.js');
 const router = require('./router.js');
 
 
@@ -20,14 +20,15 @@ exp.loader = function(req, res){
 	let type = path.extname(pathname);
 	if(type===''||resPage.test(pathname)) {
 		pathname = pathname.replace(resPage, '');
-		src = router.path(pathname);
+		src = router.page(pathname);
 		type = '.html';
 	} else {
-		src = 'vue-plugin/page' + src
+		src = router.path(src);
+		
 	}
-	header.write(req, res, type);
 	
-	file.readFile(src).then(assets => {
+	$_header.write(req, res, type);
+	$_file.readFile(src).then(assets => {
 		res.end(assets);
 	}).catch(()=>{ _404(res); });
 };

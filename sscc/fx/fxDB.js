@@ -1,6 +1,6 @@
-var mongo = require('@sscc/libs/ctrlDB.js'),
-	dict = require('@sscc/libs/dictionary.js'),
-	error =  require('@sscc/libs/error.js');
+var mongo = require('../libs/ctrlDB.js'),
+	dict = require('../libs/dictionary.js'),
+	error =  require('../libs/error.js');
 	
 var account = mongo.open('fxDB', 'user'),
 	ekey = mongo.open('fxDB', 'ekey'),
