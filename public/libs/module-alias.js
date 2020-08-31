@@ -9,7 +9,7 @@ function resolve(src = ''){
 
 moduleAlias.addAliases({
 	'$_': resolve('public'),
-	'$_utils': resolve('public/libs/utils.js')
+	'$_kit': resolve('public/libs/nodeKit.js')
 });
 
 const package = {

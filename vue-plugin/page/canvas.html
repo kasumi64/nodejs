@@ -17,7 +17,7 @@
 	<!-- <img style="width: 300px;" src="pic/wallhaven-yml8wd.webp" /> -->
 <script>
 	$module.init(['js/jsCfg'], function(require, exports, module) {
-		// line();
+		line();
 		var axes = require('js/lineChart.js');
 		
 		
@@ -47,7 +47,7 @@
 		}
 		drawLine("#F00");
 		
-		function drawGradients(){
+		function drawGradients(){ //线渐变
 			pen.lineWidth = 30;
 			pen.lineDashOffset = 0;
 			for (var i = 0; i < 255; i++) {
@@ -59,6 +59,24 @@
 			}
 		}
 		drawGradients();
+		
+		function drawRectGradients(){ //矩形渐变
+			pen.beginPath();
+			pen.lineCap = 'butt';
+			pen.lineJoin = 'miter';
+			pen.lineWidth = 4;
+			pen.setLineDash([]);
+			pen.rect(450, 20, 120, 40);
+			pen.strokeStyle = '#00BFFF';
+			pen.stroke();
+			var lg = pen.createLinearGradient(450, 20, 570, 50); //两个点{x,y},{a,b}
+			lg.addColorStop(0, 'pink');
+			lg.addColorStop(0.5, 'red');
+			lg.addColorStop(1, '#0F0');
+			pen.fillStyle = lg;
+			pen.fill()
+		}
+		drawRectGradients();
 	};
 	
 </script>

@@ -1,5 +1,5 @@
 const url = require('url');
-// const $_utils = require('$_utils');
+// const $_kit = require('$_kit');
 
 const base = 'vue-plugin/page';
 const router = {
@@ -18,7 +18,7 @@ module.exports = {
 		if(reg.test(src)) {
 			return src.replace(reg, './public/');
 		}
-		// console.log($_utils.verifyCode());
+		// console.log($_kit.verifyCode(4));
 		return base + src;
 	}
 }

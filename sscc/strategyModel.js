@@ -11,7 +11,7 @@ var fxDB = require('./fx/fxDB.js');
 var mxDB = require('./mx/mxDB.js');
 
 
-$_server.run(init, 8088);
+$_server.run(init, 5500);
 
 function init(requrest, response){
 	var method = requrest.method.toLowerCase();

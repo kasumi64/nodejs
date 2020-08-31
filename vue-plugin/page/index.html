@@ -13,13 +13,45 @@
 	button:active{background: #00BFFF;color: #FFF;}
 	input{font-size: 14px;padding: 0 10px;height: 30px;}
 </style>
+	<!-- <script src="$_/libs/webkit.js" type="text/javascript" charset="utf-8"></script> -->
 </head>
 <body>
 	<h1>NodeJS页面</h1>
 	<input />
 	<button onclick="check()">点击</button>
 <script>
+
+	
+	
 	function check(){
+		var pr = new Promise(function(su, je){
+			setTimeout(()=>{
+				su('onResolve, onReject')
+			}, 100)
+		});
+		pr.next(function(){
+			console.log(this)
+			// throw new Error('dsdf')
+			return 2
+		}).next(v => {
+		  console.log(v)
+		  return Promise.reject('err')
+		}).catch(function(v){
+		  console.log('catch', v)
+		  return Promise.stop();
+		}).next(function(v){
+		  console.log('then', v)
+		  return 3
+		}).then(function(v){
+		  console.log('next',v)
+		})
+		
+		
+		
+		
+		return;
+		
+		
 		var data = {
 			num:123,
 			str: 'ABC'

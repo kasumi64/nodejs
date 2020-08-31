@@ -22,7 +22,10 @@
 			
 			return this;
 		},
-		Dots(){
+		Dots({x, y}){
+			var {size, color} = this.config.dot;
+			var data = this.config.data;
+			
 			
 		},
 		update(arr){
@@ -95,7 +98,9 @@
 		}
 	}
 	
-	var cfg = {}
+	var cfg = {
+		canvas: {w: 800, h: 500},
+	};
 	axes.init(cfg).mounted('.box');
 	var arr = [];
 	for (let i = 0; i < 10; i++) {
