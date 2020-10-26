@@ -1,2 +1,0 @@
-HelloWorld
-装饰器
