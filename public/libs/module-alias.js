@@ -12,12 +12,12 @@ moduleAlias.addAliases({
 	'$_kit': resolve('public/libs/nodeKit.js')
 });
 
-const package = {
-	"repository": {
-		"type": "git",
-		"url": "http://baidu.com"
-	},
-}
+// const package = {
+// 	"repository": {
+// 		"type": "git",
+// 		"url": "http://baidu.com"
+// 	},
+// }
 
 module.exports = {
 	addAliases(obj = {}){

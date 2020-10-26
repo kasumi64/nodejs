@@ -13,7 +13,8 @@
 		"http-proxy": "^1.18.1",
 		"md5": "^2.2.1",
 		"mime": "^2.4.6",
-		"mongodb": "^3.5.9"
+		"mongodb": "^3.5.9",
+		"mysql": "^2.18.1"
 	},
 	"devDependencies": {
 		"module-alias": "^2.2.2"
