@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html class="aa">
+<head>
+	<meta charset="UTF-8">
+	<title>添加修改用户信息</title>
+	<script src="/dynamic/components/editUser/editUser.js"></script>
+</head>
+
+<body>
+	<div class="userBox">
+		<div class="panle">
+			<h2 class="h2">修改用户信息</h2>
+			<ul class="left">
+				<li>userID：</li>
+				<li>name：</li>
+				<li>age：</li>
+				<li>sex：</li>
+			</ul><ul class="right">
+				<li>
+					<input class="input" type="text" placeholder="请输入ID" maxlength="6"/>
+				</li><li>
+					<input class="input" type="text" placeholder="请输入姓名" maxlength="6"/>
+				</li><li>
+					<input class="input" type="text" placeholder="请输入年龄" maxlength="2"/>
+				</li><li class="radio">
+					<input type="radio" name="sex" id="sex1" checked/><label for="sex1">男</label>
+					<input type="radio" name="sex" id="sex2" /><label for="sex2">女</label>
+					<input type="radio" name="sex" id="sex3" /><label for="sex3">保密</label>
+				</li>
+			</ul>
+			<div class="updataBtn">
+				<button id="updata">提 交</button>
+				<button id="canle">取 消</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
